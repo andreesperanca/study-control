@@ -1,26 +1,67 @@
-package method_overriding;// It is possible to override method by changing the return type if subclass overrides any method
-// whose return type is Non-Primitive but it changes its return type to subclass type.
+package method_overriding;
 
-// Both methods have different return type but it is method overriding. 
-// This is known as covariant return type.
-
-class A {
-    A get() {
+class A1
+{
+    A1 foo()
+    {
         return this;
+    }
+
+    void print()
+    {
+        System.out.println("Inside the class A1");
     }
 }
 
-class B1 extends A {
 
-    B1 get() {
+// A2 is the child class of A1
+class A2 extends A1
+{
+    @Override
+    A2 foo()
+    {
         return this;
     }
 
-    void message() {
-        System.out.println("welcome to covariant return type");
+    void print()
+    {
+        System.out.println("Inside the class A2");
+    }
+}
+
+// A3 is the child class of A2
+class A3 extends A2
+{
+    @Override
+    A3 foo()
+    {
+        return this;
     }
 
-    public static void main(String args[]) {
-        new B1().get().message();
+    @Override
+    void print()
+    {
+        System.out.println("Inside the class A3");
     }
-}  
+}
+
+//public
+class CovariantExample
+{
+    // main method
+    public static void main(String argvs[])
+    {
+        A1 a1 = new A1();
+
+        a1.foo().print();
+
+        A2 a2 = new A2();
+
+        a2.foo().print();
+
+        A3 a3 = new A3();
+
+        a3.foo().print();
+
+    }
+}
